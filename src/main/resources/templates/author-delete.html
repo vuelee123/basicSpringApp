@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Delete Author</title>
+</head>
+<body>
+<h1>Delete Author</h1>
+<p>Are you sure you want to delete the author with ID: <span th:text="${author.id}"></span>?</p>
+<form th:action="@{/authors/{id}(id=${author.id})}" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Delete</button>
+</form>
+</body>
+</html>

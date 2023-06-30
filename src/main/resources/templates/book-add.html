@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Book</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: darkseagreen;
+      padding: 20px;
+    }
+    .form-container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .btn {
+      background-color: cadetblue;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="form-container">
+    <h1>Add Book</h1>
+    <form action="/books/add" method="post" th:object="${book}">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title:</label>
+        <input type="text" id="title" name="title" th:field="*{title}" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="authorName" class="form-label">Author:</label>
+        <input type="text" id="authorName" name="author.name" th:field="*{author.name}" class="form-control" required>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/books'">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
