@@ -62,7 +62,6 @@ public class AuthorController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid author ID: " + id));
 
         if (result.hasErrors()) {
-            // If there are validation errors, return to the edit form
             return "author-edit";
         }
 
@@ -70,7 +69,6 @@ public class AuthorController {
             author.setName(updatedAuthor.getName());
             authorRepository.save(author);
         } else {
-            // If the author name does not meet the validation requirements, add an error to the BindingResult
             result.rejectValue("name", "author.name", "Name should have at least 3 characters");
             return "author-edit";
         }

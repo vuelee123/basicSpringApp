@@ -33,7 +33,7 @@ public class BookController {
     @PostMapping("/add")
     public String addBook(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "book-add"; // Return to the form with validation errors
+            return "book-add";
         }
 
         Author author = book.getAuthor();
@@ -56,7 +56,7 @@ public class BookController {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid book ID: " + id));
         model.addAttribute("book", book);
-        return "book-edit"; // Updated template name to match the HTML file
+        return "book-edit";
     }
 
     @PostMapping("/{id}/edit")
@@ -65,7 +65,6 @@ public class BookController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid book ID: " + id));
 
         if (bindingResult.hasErrors()) {
-            // Return to the edit form with validation errors
             return "book-edit";
         }
 
