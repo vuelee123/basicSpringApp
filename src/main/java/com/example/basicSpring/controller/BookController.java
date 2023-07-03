@@ -31,7 +31,11 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public String addBook(@Valid @ModelAttribute("book") Book book) {
+    public String addBook(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "book-add"; // Return to the form with validation errors
+        }
+
         Author author = book.getAuthor();
         authorRepository.save(author);
 
@@ -41,7 +45,6 @@ public class BookController {
         bookRepository.save(book);
         return "redirect:/books";
     }
-
     @GetMapping
     public String getAllBooks(Model model) {
         model.addAttribute("books", bookRepository.findAll());

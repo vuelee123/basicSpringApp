@@ -30,10 +30,12 @@
       <div class="mb-3">
         <label for="title" class="form-label">Title:</label>
         <input type="text" id="title" name="title" th:field="*{title}" class="form-control" required>
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></span>
       </div>
       <div class="mb-3">
         <label for="authorName" class="form-label">Author:</label>
         <input type="text" id="authorName" name="author.name" th:field="*{author.name}" class="form-control" required>
+        <span th:if="${#fields.hasErrors('author.name')}" th:errors="*{author.name}" class="text-danger"></span>
       </div>
       <div class="text-center">
         <button type="submit" class="btn btn-primary">Add</button>
