@@ -60,9 +60,14 @@ public class BookController {
     }
 
     @PostMapping("/{id}/edit")
-    public String editBook(@PathVariable("id") Long id, @ModelAttribute("book") Book updatedBook) {
+    public String editBook(@PathVariable("id") Long id, @Valid @ModelAttribute("book") Book updatedBook, BindingResult bindingResult) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid book ID: " + id));
+
+        if (bindingResult.hasErrors()) {
+            // Return to the edit form with validation errors
+            return "book-edit";
+        }
 
         if (updatedBook.getTitle() != null) {
             book.setTitle(updatedBook.getTitle());

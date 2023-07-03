@@ -5,6 +5,7 @@ import com.example.basicSpring.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,14 +56,24 @@ public class AuthorController {
         return "author-edit";
     }
 
-    @PostMapping("/edit/{id}")
-    public String editAuthor(@PathVariable("id") Long id, @ModelAttribute("author") Author updatedAuthor) {
+    @PostMapping("/{id}/edit")
+    public String editAuthor(@PathVariable("id") Long id, @ModelAttribute("author") Author updatedAuthor, BindingResult result) {
         Author author = authorRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid author id: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid author ID: " + id));
 
-        // Update the author's name or any other properties as needed
-        author.setName(updatedAuthor.getName());
-        authorRepository.save(author);
+        if (result.hasErrors()) {
+            // If there are validation errors, return to the edit form
+            return "author-edit";
+        }
+
+        if (updatedAuthor.getName() != null && updatedAuthor.getName().length() >= 3) {
+            author.setName(updatedAuthor.getName());
+            authorRepository.save(author);
+        } else {
+            // If the author name does not meet the validation requirements, add an error to the BindingResult
+            result.rejectValue("name", "author.name", "Name should have at least 3 characters");
+            return "author-edit";
+        }
 
         return "redirect:/authors";
     }

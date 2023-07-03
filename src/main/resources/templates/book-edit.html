@@ -3,14 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <title>Update Book</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: darkseagreen;
+      padding: 20px;
+    }
+    .card {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .btn {
+      background-color: cadetblue;
+    }
+  </style>
 </head>
 <body>
-<h1>Update Book</h1>
-<form th:action="@{/books/{id}/edit(id=${book.id})}" th:object="${book}" method="post">
-  <input type="hidden" th:field="*{id}" />
-  <label>Title: <input type="text" th:field="*{title}" /></label></br>
-  <label>Author: <input type="text" th:field="*{author.name}" /></label></br>
-  <input type="submit" value="Update" />
-</form>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title">Update Book</h1>
+      <form th:action="@{/books/{id}/edit(id=${book.id})}" th:object="${book}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input type="text" class="form-control" id="title" th:field="*{title}" />
+          <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+          <label for="author">Author:</label>
+          <input type="text" class="form-control" id="author" th:field="*{author.name}" />
+          <span th:if="${#fields.hasErrors('author.name')}" th:errors="*{author.name}" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='/authors'">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
