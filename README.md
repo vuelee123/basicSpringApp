@@ -4,8 +4,8 @@ This is a simple library management system using Spring Boot, Spring Web, Thymel
 To Set up the project:
 -
 - clone the repository https://github.com/vuelee123/basicSpringApp.git by using 'git clone'.
-- import the project into IDE as a Maven project.
-- run the application from IDE or use the command 'mvn spring-boot:run' in the terminal.
+- import the project into Intellij as a Maven project.
+- run the application from Intellij or use the command 'mvn spring-boot:run' in the terminal.
 - open your web browser and navigate to 'http://localhost:8080' on the url where it will take you to the home page.
 ### On the home page, you are given two options to perform the CRUD operations by either choosing 'Author List' or 'Book List'.
 
@@ -17,7 +17,7 @@ Model
 Repository
 -
 -  BookRepository interface extends 'JpaRepository<Book, Long>' and provides CRUD operations for the 'Book' model.
--  AuthorRepository interface extends 'JpaRepository<Author, Long>' and provides CRUD operations for the 'Author' model.
+-  AuthorRepository interface extends 'JpaRepository<Author, Long>' and provs CRUD operations for the 'Author' model.
 
 Controller
 -
